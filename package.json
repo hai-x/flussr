@@ -1,0 +1,46 @@
+{
+  "name": "monorepo",
+  "scripts": {
+    "clean": "rm -rf node_modules .tsbuildinfo & pnpm -r exec rm -rf node_modules .flussr dist",
+    "build": "tsc -b",
+    "watch": "tsc -b --watch",
+    "playground": "pnpm build && cd ./playground && node node_modules/flussr/bin/flussr.js dev"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=10.5.2"
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "nano-staged": {
+    "*.{md,mdx,json,css,less,scss}": "prettier --write",
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --ignore-path .prettierignore --write"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "yarn exec nano-staged"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@eslint/eslintrc": "^2.1.4",
+    "globals": "^16.0.0",
+    "typescript-eslint": "^8.26.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.0.2",
+    "nano-staged": "^0.8.0",
+    "prettier": "^3.5.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "simple-git-hooks": "^2.11.1",
+    "typescript": "5.8.2"
+  }
+}
